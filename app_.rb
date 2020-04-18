@@ -1,6 +1,5 @@
-# Пример
 add = 0
-  ass = add + 4 # Rubikon
-# Cgtcbdfz ,f,f,
+  ass = add + 4 
+list_file 
 File.close
-###
+End
