@@ -1,5 +1,9 @@
-add = 0
+# Пример
+add = 0 
   ass = add + 4 
+puts "#{ass}" 
+  
 list_file 
+# Файл закрывается
 File.close
 End
