@@ -73,7 +73,7 @@ def select_file_type
     @file_type = '.erb'
   
   else
-    puts 'OPR: Invalid value'
+    puts 'OPR: (!) Invalid value'
     @file_name = 'invalid'
     @file_type = '.file'
   
@@ -105,8 +105,8 @@ if    @file_type == '.rb'   then clear_file_rb    # Обработка файл�
 elsif @file_type == '.erb'  then clear_file_erb   # Обработка файла View ERB
           
 else                      # Неизвестный программе формат файла
-                          print 'OPR: File format is not confirm. Press "ENTER"'
-                          @f2.write '# DHL: It\'s error.'            #_ Выводим признак ошибочного формата.
+                          print 'OPR: File format is not confirm. Press "ENTER" key'
+                          @f2.write '# DHL: It\'s error. (!)'            #_ Выводим признак ошибочного формата.
                           gets
 end
 
@@ -117,3 +117,6 @@ end
 @f2.close
  
 puts 'OPR: _____________________________________STOPED PROGRAM!'
+puts
+puts
+# > > > > > >  _ _ _ E N D   P R O G R A M _ _ _  < < < < < < #
