@@ -7,3 +7,4 @@ list_file
 # Файл закрывается
 File.close
 End
+# DHL: All Ready.
