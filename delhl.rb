@@ -78,7 +78,7 @@ def select_file_type
     @file_type = '.file'
   
   end
- 
+  puts "OPR: Select #{@file_type}"
 end
 
 # ======================== О С Н О В Н А Я =============== П Р О Г Р А М М А ========================= 00
