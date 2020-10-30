@@ -1,0 +1,81 @@
+<p id="notice"><%= notice %></p>
+
+<div class="border border-info" >
+  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <div class="text-left col-md-11 col-sm-10">
+      <a class="navbar-brand" href="/notes">Notes</a>
+      <%= link_to 'New Note', new_note_path, class: 'btn btn-outline-primary btn-sm' if user_signed_in? %>
+    </div>         
+    <div class="text-right col-md-1 col-sm-2"> 
+      <%= link_to ' Home ',      root_path, class: 'btn btn-outline-info btn-sm' %>
+    </div>
+  </nav>
+</div>
+
+<% stars_display %>
+
+                                        <% s=2                                                          %>
+                                        <% s=0 if user_signed_in?                                       %>
+
+                                        <% s.upto(2) do |i|                                             %>
+
+                                        <%    if    i == 0                                              %>
+                                        <%      hh_name = :closed                                       %>
+                                        <%      title_table = 'It is My private notes:'                 %>
+
+                                        <%    elsif i == 1                                              %>
+                                        <%      hh_name = :open                                         %>
+                                        <%      title_table = 'It is My public notes:'                  %>
+
+                                        <%    elsif i == 2                                              %>
+                                        <%      hh_name = :public                                       %>
+                                        <%      title_table = 'It is public notes of all other users:'  %>
+                                      
+                                        <%    end                                                       %>
+                                        <!-- теперь установив эти две переменные выводим таблицу       -->
+                                        <!--                            для каждого вида записей       -->
+                                        <!-- конец этого скрипта ищи ниже                              -->
+<h4 class="text-left"><%= title_table %></h4>
+<table class="table">
+    <thead class="thead-light"> 
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @notes_3[hh_name].each do |note| %> <!-- # Перебираем все запист в выбранном (по hh_name) хеше -->
+        <tr>
+          <td><%= note.id %></td>
+          <td><b><%= note.title %></b></td>
+          <td>
+<!-- I -->  <%= note.description %><br />
+            
+<!-- II --> <%= link_to 'Tags:', tags_path %> 
+            <% note.tags.each do |tag| %>
+               <i><%=  tag.title %></i>
+            <% end %><br />
+            
+<!-- III -->  <div class='text-right'>
+                <%= link_to 'Show',    note_path(note), class: 'btn btn-outline-success btn-sm' %>
+                <%= link_to 'Link to', note.url,  class: 'btn btn-outline-primary btn-sm' %>
+
+                <% if user_signed_in? %>             <!-- выводить DELETE & EDIT только если КЛИЕНТ, а дальше -->
+
+                  <% if current_user.id == note.user_id %> <!-- выводить DELETE & EDIT если КЛИЕНТ есть АВТОР -->
+
+                    <%= link_to 'Edit',    edit_note_path(note), class: 'btn btn-outline-warning btn-sm'%>
+                    <%= link_to 'Destroy', note_path(note),      class: 'btn btn-outline-danger btn-sm',   method: :delete, data: { confirm: 'Are you sure?' } %>
+                  
+                  <% end %> <!-- /if current_user.id... -->
+                
+                <% end %> <!-- /if user_signed_in... -->  
+              </div>
+            </tr>
+          </td> 
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+                                        <% end                                                        %>
