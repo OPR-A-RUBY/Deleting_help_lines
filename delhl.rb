@@ -68,26 +68,35 @@ end
 # Выбираем файл для обработки
 
 # Анализируем выбранный файл
-# file_type = 'rb'                                      #_ для rb 
-file_type = 'erb'                                   #_ для erb
+puts 'OPR: Please select: 1 - rb,  2 - erb'
+n = gets.strip
 
-# Формируем имя временного файла для записи
-# tmp_file_name = 'app_' + '.' + file_type              #_ для rb 
-tmp_file_name = 'index.html_' + '.' + file_type     #_ для erb
+if n == '1'           #_ Для обработки RB расширений файлов
+  file_name = 'app'
+  file_type = '.rb'
+elsif n == '2'        #_ Для обработки ERB расширений файлов
+  file_name = 'index.html'
+  file_type = '.erb'
+else
+  puts 'OPR: Invalid value'
+  file_name = 'invalid'
+  file_type = '.file'
+end
 
 # Открываем выбранный файл для чтения информации
-# @f1 = File.open 'app.rb', 'r'                         #_ для rb 
-@f1 = File.open 'index.html.erb', 'r'               #_ для erb
+@f1 = File.open file_name + file_type, 'r'
 
 # Открываем новый файл для записи информации
-@f2 = File.open tmp_file_name, 'w'
+@f2 = File.open file_name + '_' + file_type, 'w'
 
-if    file_type == 'rb'   then clear_file_rb    # Обработка файла RUBY
+
+
+if    file_type == '.rb'   then clear_file_rb    # Обработка файла RUBY
           
-elsif file_type == 'erb'  then clear_file_erb   # Обработка файла View ERB
+elsif file_type == '.erb'  then clear_file_erb   # Обработка файла View ERB
           
 else                      # Неизвестный программе формат файла
-                          puts "File format is not confirm"
+                          puts "OPR: File format is not confirm"
                           gets
 end
 
@@ -97,4 +106,4 @@ end
 # Закрываем файл в который писали очищенную информацию  
 @f2.close
  
-puts "_____________________________________STOPED PROGRAM!"
+puts 'OPR: _____________________________________STOPED PROGRAM!'
